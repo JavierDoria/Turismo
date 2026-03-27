@@ -32,7 +32,7 @@ namespace AppMarcahuasi.Procedimientos
                     oCm.Parameters.Add("@Nacionalidad", SqlDbType.Char, 1).Value = turismo.Nacionalidad;
                     oCm.Parameters.Add("@PrecioBoleta", SqlDbType.Int).Value = turismo.PrecioBoleta;
                     oCm.Parameters.AddWithValue("@Correlativo", Parametros.Correlativo);
-                    oCm.Parameters.Add("@Usuario_Registro", SqlDbType.VarChar, 40).Value = "ADMIN";
+                    oCm.Parameters.AddWithValue("@Usuario_Registro", Parametros.UserLogin);
                     Respuesta = oCm.ExecuteNonQuery() > 0;
                 }
                 catch (Exception)
@@ -42,6 +42,7 @@ namespace AppMarcahuasi.Procedimientos
             }
             return Respuesta;
         }
+
         public bool ActualizarTurista(Turismo turismo)
         {
             bool Respuesta = true;
@@ -87,70 +88,87 @@ namespace AppMarcahuasi.Procedimientos
 
             return Respuesta;
         }
-        //public DataTable ListarTuristas(DateTime fechaInicio, DateTime fechaFin, string nacionalidad)
-        //{
-        //    DataTable dt = new DataTable();
-        //    SqlConnection con = new SqlConnection(_cadena);
-        //    SqlCommand oCm = new SqlCommand();
 
-        //    oCm.CommandType = CommandType.StoredProcedure;
-        //    oCm.CommandText = "sp_Listar";
-        //    oCm.Connection = con;
-
-        //    try
-        //    {
-        //        con.Open();
-        //        oCm.Parameters.Clear();
-
-        //        oCm.Parameters.Add("@Fecha_Inicio", SqlDbType.DateTime).Value = fechaInicio;
-        //        oCm.Parameters.Add("@Fecha_Fin", SqlDbType.DateTime).Value = fechaFin;
-
-        //        //Si no selecciona nada → NULL
-        //        if (string.IsNullOrEmpty(nacionalidad))
-        //            oCm.Parameters.Add("@Nacionalidad", SqlDbType.Char, 1).Value = DBNull.Value;
-        //        else
-        //            oCm.Parameters.Add("@Nacionalidad", SqlDbType.Char, 1).Value = nacionalidad;
-
-        //        SqlDataAdapter da = new SqlDataAdapter(oCm);
-        //        da.Fill(dt);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //        con.Dispose();
-        //    }
-        //    return dt;
-        //}
-
-        public Turismo ObtenerTuristas()
+        public List<Turismo> ListarTuristas(DateTime fechaInicio, DateTime fechaFin, string nacionalidad)
         {
-            Turismo t = null;
+            List<Turismo> listado = new List<Turismo>();
+            SqlConnection con = new SqlConnection(_cadena);
+            SqlCommand oCm = new SqlCommand();
+            SqlDataReader dr = null;
 
-            using (SqlConnection con = new SqlConnection(_cadena))
-            using (SqlCommand cmd = new SqlCommand("sp_ObtenerUltimoRegistro", con))
+            oCm.CommandType = CommandType.StoredProcedure;
+            oCm.CommandText = "sp_Listar";
+            oCm.Connection = con;
+
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                oCm.Parameters.Clear();
+
+                oCm.Parameters.Add("@Fecha_Inicio", SqlDbType.DateTime).Value = fechaInicio;
+                oCm.Parameters.Add("@Fecha_Fin", SqlDbType.DateTime).Value = fechaFin;
+                oCm.Parameters.Add("@Nacionalidad", SqlDbType.Char, 1).Value = nacionalidad;
+
+                dr = oCm.ExecuteReader();
+                while (dr.Read())
                 {
-                    if (dr.Read())
+                    Turismo turista = new Turismo();
+                    turista.Id_Turista = Convert.ToInt32(dr["Id_Turista"]);
+                    turista.Nombres = dr["Nombres"].ToString();
+                    turista.Apellidos = dr["Apellidos"].ToString();
+                    turista.Nacionalidad = dr["Nacionalidad"].ToString().Trim()[0];
+                    turista.PrecioBoleta = Convert.ToInt32(dr["PrecioBoleta"]);
+                    turista.Correlativo = dr["Correlativo"].ToString();
+                    turista.Fecha_Registro = Convert.ToDateTime(dr["Fecha_Registro"]);
+                    turista.Usuario_Registro = dr["Usuario_Registro"].ToString();
+
+                    listado.Add(turista);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            return listado;
+        }
+
+        public List<Turismo> ObtenerTuristas()
+        {
+            List<Turismo> listado = new List<Turismo>();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_cadena))
+                using (SqlCommand cmd = new SqlCommand("sp_ObtenerUltimoRegistro", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        t = new Turismo()
+                        if (dr.Read())
                         {
-                            Id_Turista = Convert.ToInt32(dr["Id_Turista"]),
-                            Nombres = dr["Nombres"].ToString(),
-                            Apellidos = dr["Apellidos"].ToString(),
-                            Nacionalidad = dr["Nacionalidad"].ToString().Trim()[0],
-                            PrecioBoleta = Convert.ToInt32(dr["PrecioBoleta"])
-                        };
+                            Turismo turista = new Turismo();
+                            turista.Id_Turista = Convert.ToInt32(dr["Id_Turista"]);
+                            turista.Nombres = dr["Nombres"].ToString();
+                            turista.Apellidos = dr["Apellidos"].ToString();
+                            turista.Nacionalidad = dr["Nacionalidad"].ToString().Trim()[0];
+                            turista.PrecioBoleta = Convert.ToInt32(dr["PrecioBoleta"]);
+
+                            listado.Add(turista);
+                        }
                     }
                 }
             }
-            return t;
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return listado;
         }
     }
 }

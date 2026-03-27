@@ -1,23 +1,36 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
-SET ANSI_NULLS ON
+CREATE DATABASE TurismoCasta
 GO
-SET QUOTED_IDENTIFIER ON
+
+USE TurismoCasta
 GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
+
+CREATE TABLE [dbo].[Turista](
+	[Id_Turista] [int] IDENTITY(1,1) NOT NULL,
+	[Nombres] [varchar](40) NOT NULL,
+	[Apellidos] [varchar](40) NOT NULL,
+	[Nacionalidad] [char](1) NOT NULL,
+	[PrecioBoleta] [int] NOT NULL,
+	[Correlativo] [varchar](15) NOT NULL,
+	[Fecha_Registro] [datetime] NOT NULL,
+	[Fecha_Modificacion] [datetime] NULL,
+	[Usuario_Registro] [varchar](40) NULL,
+	[Usuario_Modificacion] [varchar](40) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Turista] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Turista] ADD  CONSTRAINT [DF_Turistas_FechaRegistro]  DEFAULT (getdate()) FOR [Fecha_Registro]
+GO
+
+ALTER TABLE [dbo].[Turista]  WITH CHECK ADD CHECK  (([Nacionalidad]='E' OR [Nacionalidad]='N'))
+GO
+
+
+
+-- =============================================Registrar
 CREATE PROCEDURE sp_RegistrarTurista 
 	@Nombres VARCHAR(40),
 	@Apellidos VARCHAR(40),
@@ -38,6 +51,7 @@ BEGIN
 	(@Nombres, @Apellidos, @Nacionalidad, @PrecioBoleta, @CorrelativoTxt, GETDATE(), @Usuario_Registro)
 END
 GO
+
 -- =============================================Actualizar
 CREATE PROCEDURE sp_Actualizar
     @Id_Turista INT,
@@ -71,7 +85,7 @@ BEGIN
 	FROM Turista where (@Nacionalidad = '' or @Nacionalidad = Nacionalidad)
 	and Fecha_Registro between @Fecha_Inicio and @Fecha_Fin;
 END
-select * from turista
+GO
 
 CREATE PROCEDURE [dbo].[sp_ObtenerUltimoRegistro]
 
