@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace AppMarcahuasi.Infraestructura
 {
@@ -18,7 +20,7 @@ namespace AppMarcahuasi.Infraestructura
         {
             if (!IsPostBack)
             {
-                
+                InitControls();
             }
             else
             {
@@ -26,7 +28,19 @@ namespace AppMarcahuasi.Infraestructura
                 {
                     ObtenerListadoTuristas();
                 }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "quitarSpinner()", true);
             }
+        }
+
+        private void InitControls()
+        {
+            ValidarSiInicioSesion();
+        }
+
+        private void ValidarSiInicioSesion()
+        {
+            //if (true)
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "window.location.href = ('VistaPrincipal.aspx');", true);
         }
 
         public void ObtenerListadoTuristas()
@@ -35,8 +49,8 @@ namespace AppMarcahuasi.Infraestructura
             {
                 Logica logica = new Logica();
 
-                DateTime fechaInicio = new DateTime(1753, 1, 1);
-                DateTime fechaFin = new DateTime(9999, 12, 31);
+                DateTime fechaInicio = new DateTime(1900, 1, 1);
+                DateTime fechaFin = new DateTime(3000, 12, 31);
                 string filtroNacionalidad = "";
 
                 if (txtfechaInicio.Value != "")
@@ -50,6 +64,7 @@ namespace AppMarcahuasi.Infraestructura
 
                 List<Turismo> listado = new List<Turismo>();
                 listado = logica.ListarTuristas(fechaInicio, fechaFin, filtroNacionalidad);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "quitarSpinner()", true);
                 ExportarExcel(listado, fechaInicio, fechaFin);
             }
             catch (Exception ex)
@@ -62,10 +77,19 @@ namespace AppMarcahuasi.Infraestructura
         {
             string colorCabecera = "#224275";
             string colorLetraCabecera = "#FFFFFF";
+            string titulo = "REGISTRO DE INGRESOS PARA CONTROL (MOSTRANDO TODA LA INFORMACION)";
+
+            if (fechaInicio.Year != 1900 && fechaFin.Year != 3000)
+                titulo = "REGISTRO DE INGRESOS PARA CONTROL DEL " + fechaInicio.ToShortDateString() + " AL " + fechaFin.ToShortDateString();
+            else if (fechaInicio.Year != 1900)
+                titulo = "REGISTRO DE INGRESOS PARA CONTROL DEL " + fechaInicio.ToShortDateString() + " AL " + DateTime.Now.ToShortDateString();
+            else if (fechaFin.Year != 3000)
+                titulo = "REGISTRO DE INGRESOS PARA CONTROL HASTA LA FECHA " + fechaFin.ToShortDateString();
+
 
             using (var workbook = new XLWorkbook())
             {
-                var prueba = workbook.Worksheets.Add("LISTADO TURISTAS");
+                var prueba = workbook.Worksheets.Add("Registro Ingresos");
 
                 int nFila = 1;
                 int nColumna = 1;
@@ -73,7 +97,7 @@ namespace AppMarcahuasi.Infraestructura
 
                 #region cabecera
                 prueba.Range("A1:E1").Merge();
-                prueba.Range("A1:E1").Value = "LISTADO DE TURISTAS PARA CONTROL DEL " + fechaInicio.ToShortDateString() + " AL " + fechaFin.ToShortDateString();
+                prueba.Range("A1:E1").Value = titulo;
                 prueba.Range("A1:E1").Style.Font.Bold = true;
                 prueba.Range("A1:E1").Style.Font.FontSize = 15;
 
@@ -150,7 +174,8 @@ namespace AppMarcahuasi.Infraestructura
                 prueba.Column("A").Width = 10;
                 prueba.Columns("A,D,E,G,H").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 prueba.Columns("B:C").Width = 30;
-                prueba.Columns("D:E").Width = 15;
+                prueba.Column("D").Width = 18;
+                prueba.Column("E").Width = 15;
                 prueba.Column("D").Style.Font.Bold = true;
                 prueba.Column("F").Width = 12;
                 prueba.Column("G").Width = 25;
@@ -159,17 +184,23 @@ namespace AppMarcahuasi.Infraestructura
 
                 #endregion
 
-                // Descargar
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=ReporteTuristasMarcahuasi.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename=ReporteIngresosMarcahuasi-" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+                HttpCookie downloadCookie = new HttpCookie("descargaCompleta", "true");
+                downloadCookie.Path = "/";
+                downloadCookie.HttpOnly = false;
+                downloadCookie.Expires = DateTime.Now.AddMinutes(1);
+                Response.AppendCookie(downloadCookie);
 
                 using (MemoryStream memo = new MemoryStream())
                 {
                     workbook.SaveAs(memo);
                     Response.BinaryWrite(memo.ToArray());
+
                     Response.Flush();
                     Response.End();
                 }
