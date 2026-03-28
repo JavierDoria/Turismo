@@ -31,21 +31,28 @@
         background-color: #2c3e50;
         color: white;
     }
-
+    .row{
+        padding:10px 18px;
+    }
     bodyD {
         display: flex;
         align-items: center;
         justify-content: center;
         color: #111827;
     }
+    .text-end{
+        padding: 10px;
+    }
     .login-container {
-        background-color: #ffffff;
+        background-color: #cdcdda;
+        border:1px solid black;
         border-radius: 16px;
         padding: 48px;
         width: 100%;
         max-width: 400px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
         animation: fadeIn 0.5s ease-out forwards;
+
     }
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
@@ -61,7 +68,7 @@
         text-align: left;
     }
     .login-header h1 {
-        font-size: 26px;
+        font-size: 35px;
         font-weight: 600;
         color: #111827;
         margin-bottom: 8px;
@@ -70,12 +77,14 @@
     .login-header p {
         font-size: 15px;
         color: #6b7280;
+        text-align:center;
     }
     .input-group {
         margin-bottom: 24px;
     }
     .input-group label {
         display: block;
+        width:100%;
         font-size: 14px;
         font-weight: 500;
         color: #374151;
@@ -181,9 +190,13 @@
 <script>
     const PrecioNacional = <%= PrecioNacional %>;
     const PrecioInternacional = <%= PrecioInternacional %>;
-
-    function comprobarCredenciales() {
-        window.location.href = ("VistaAdministrador.aspx");
+    
+    function errorLogin() {
+        Swal.fire({
+            icon: "Datos Incorrectos",
+            title: "Oops... Algo salio mal",
+            html: ` <small>` + texto + `</small>`
+        });
     }
 
     function iniciarSession() {
@@ -227,7 +240,7 @@
             html: ` <small>` + texto + `</small>`
         });
     }
-
+    
     function registrarTicket() {
         document.getElementById('Accion').value = "REGISTRAR";
         document.forms[0].submit();
@@ -313,8 +326,8 @@
 
 
         <!----------- MODAL INICIO SESION Inicio ----------->
-        <div id="mostrarInicioSesion" style=" background-color:white; width:500px; height:60vh; margin:auto; 
-            position:absolute; z-index:10; border:1px solid black; left:0; right:0; top:0;bottom:0;">
+        <div id="mostrarInicioSesion" style=" width:500px; height:60vh; margin:auto; 
+            position:absolute; z-index:10; left:0; right:0; top:0;bottom:0;">
       
             <bodyD>
                 <div class="login-container">
@@ -324,16 +337,17 @@
                     </div>
                     <div id="loginForm">
                         <div class="input-group">
-                            <label for="dni">DNI</label>
-                            <input type="text" id="dni" placeholder="Ej. 12345678" maxlength="8" autocomplete="off" />
+                            <label for="Dni">DNI</label>
+                            <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="Ej.12345678" maxlength="8" autocomplete="off" />
                         </div>
                         <div class="input-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" id="password" placeholder="Tu contraseña" autocomplete="new-password" />
+                            <label for="Password">Contraseña</label>
+                            <asp:TextBox ID="txtPassword" TextMode="password" runat="server" CssClass="form-control" placeholder="Tu contraseña" autocomplete="new-password" />
                         </div>
-                        <button type="button" class="submit-btn" id="submitBtn" onclick="comprobarCredenciales()">
+                        <%--<button type="button" class="submit-btn" id="submitBtn" onclick="IngresarLogin()">
                             Iniciar Sesión
-                        </button>
+                        </button>--%>
+                        <asp:Button ID="btnLogin" runat="server" CssClass="submit-btn" Text="Iniciar Sesión"  OnClick="IngresarLogin" />
                         <button type="button" class="submit-btn" id="cerrarBtn" onclick="ocultarInicioSesion()">
                             Cerrar
                         </button>
@@ -403,11 +417,7 @@
                             <asp:BoundField DataField="Apellidos" HeaderText="Apellidos" />
                             <asp:TemplateField HeaderText="Nacionalidad">
                                 <ItemTemplate>
-                                    <asp:DropDownList 
-                                        ID="ddlGridNacionalidad" 
-                                        runat="server" 
-                                        CssClass="form-select"
-                                        onchange ="asignarPrecio()"
+                                    <asp:DropDownList  ID="ddlGridNacionalidad" runat="server" CssClass="form-select" onchange ="asignarPrecio()"
                                         Enabled ="false">
                                         <asp:ListItem Text="Nacional" Value="Nacional" />
                                         <asp:ListItem Text="Extranjero" Value="Extranjero" />

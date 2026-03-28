@@ -2,6 +2,7 @@
 using AppMarcahuasi.Procedimientos;
 using AppMarcahuasi.Utils;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Math;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,14 +33,21 @@ namespace AppMarcahuasi.Infraestructura
                 {
                     RegistrarTicket();
                     ObtenerUltimoTurista();
+                    
                 }
                 else if (Accion.Value == "EXP_EXCEL")
                 {
                     ObtenerListadoTuristas();
                 }
+                limpiarCamposRegistro();
             }
         }
-
+        private void limpiarCamposRegistro()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            ddlNacionalidad.SelectedIndex = 0;
+        }
         private void ObtenerUltimoTurista()
         {
             Logica logica = new Logica();
@@ -59,6 +67,13 @@ namespace AppMarcahuasi.Infraestructura
 
         private void RegistrarTicket()
         {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtApellido.Text))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg",
+                    "errorTicket('Completa todos los campos')", true);
+                return;
+            }
             Logica logica = new Logica();
             Turismo turismo = new Turismo();
 
@@ -219,7 +234,48 @@ namespace AppMarcahuasi.Infraestructura
             }
         }
 
+        protected void IngresarLogin(object sender, EventArgs e)
+        {
+            string Dni = txtDni.Text.Trim();
+            string Password = txtPassword.Text.Trim();
+            if (string.IsNullOrEmpty(Dni) || string.IsNullOrEmpty(Password))
+            {
+                MostrarError("Complete todos los campos");
+                return;
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(Dni, @"^\d{8}$"))
+            {
+                MostrarError("El DNI debe tener 8 dígitos");
+                return;
+            }
+            try
+            {
+                Administrador admin = new Administrador
+                {
+                    Dni = Dni,
+                    Password = Password
+                };
+                Logica logica = new Logica();
+                bool acceso = logica.VerificarLogin(admin);
+                if (acceso)
+                {
+                    Session["Dni"] = Dni;
+                    Response.Redirect("VistaAdministrador.aspx");
+                }
+                else
+                {
+                    MostrarError("DNI o contraseña incorrectos");
+                }
+            }
+            catch
+            {
+                MostrarError("Ocurrió un error al intentar iniciar sesión");
+            }
+        }
+        private void MostrarError(string mensaje)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(),
+                "msg", $"errorTicket('{mensaje}')", true);
+        }
     }
-
-
 }

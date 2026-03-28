@@ -17,7 +17,6 @@ namespace AppMarcahuasi.Procedimientos
 
         public bool RegistrarTurista(Turismo turismo)
         {
-
             bool Respuesta = false;
             using (SqlConnection con = new SqlConnection(_cadena))
             using (SqlCommand oCm = new SqlCommand("sp_RegistrarTurista", con))
@@ -169,6 +168,20 @@ namespace AppMarcahuasi.Procedimientos
                 throw;
             }
             return listado;
+        }
+
+        public bool VerificarLogin(Administrador admin)
+        {
+            using (SqlConnection con = new SqlConnection(_cadena))
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT 1 FROM Administrador WHERE Dni = @Dni AND Password = @Password", con))
+            {
+                cmd.Parameters.Add("@Dni", SqlDbType.VarChar, 8).Value = admin.Dni;
+                cmd.Parameters.Add("@Password", SqlDbType.VarChar, 25).Value = admin.Password;
+
+                con.Open();
+                return cmd.ExecuteScalar() != null;
+            }
         }
     }
 }

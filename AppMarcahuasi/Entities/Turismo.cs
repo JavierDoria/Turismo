@@ -10,7 +10,9 @@ namespace AppMarcahuasi.Entities
     {
         [Key]
         public int Id_Turista { get; set; }
+        [Required(ErrorMessage = "El nombre es obligatorio")]
         public string Nombres { get; set; }
+        [Required (ErrorMessage = "Los apellidos son obligatorios")]
         public string Apellidos { get; set; }
         public char Nacionalidad { get; set; }
         public int PrecioBoleta { get; set; }

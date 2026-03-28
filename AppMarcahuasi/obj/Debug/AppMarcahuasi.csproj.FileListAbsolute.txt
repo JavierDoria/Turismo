@@ -177,3 +177,28 @@ C:\Users\USUARIO\Desktop\proyecto casta\AppMarcahuasi\bin\System.Buffers.xml
 C:\Users\USUARIO\Desktop\proyecto casta\AppMarcahuasi\bin\System.Memory.xml
 C:\Users\USUARIO\Desktop\proyecto casta\AppMarcahuasi\bin\System.Numerics.Vectors.xml
 C:\Users\USUARIO\Desktop\proyecto casta\AppMarcahuasi\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ClosedXML.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ClosedXML.Parser.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\DocumentFormat.OpenXml.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\DocumentFormat.OpenXml.Framework.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ExcelNumberFormat.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\Microsoft.Bcl.HashCode.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\RBush.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\SixLabors.Fonts.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Buffers.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Memory.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Numerics.Vectors.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ClosedXML.pdb
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ClosedXML.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ClosedXML.Parser.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\DocumentFormat.OpenXml.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\DocumentFormat.OpenXml.Framework.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\ExcelNumberFormat.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\Microsoft.Bcl.HashCode.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\RBush.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\SixLabors.Fonts.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Buffers.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Memory.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Numerics.Vectors.xml
+C:\Users\jjjja\Desktop\appMuni\AppMarcahuasi\AppMarcahuasi\bin\System.Runtime.CompilerServices.Unsafe.xml
