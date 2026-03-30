@@ -1,6 +1,7 @@
 ﻿using Antlr.Runtime.Misc;
 using AppMarcahuasi.Entities;
 using AppMarcahuasi.Procedimientos;
+using AppMarcahuasi.Utils;
 using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,6 @@ namespace AppMarcahuasi.Infraestructura
         {
             if (!IsPostBack)
             {
-                InitControls();
             }
             else
             {
@@ -28,22 +28,24 @@ namespace AppMarcahuasi.Infraestructura
                 {
                     ObtenerListadoTuristas();
                 }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "quitarSpinner()", true);
+                else if (Accion.Value == "LOGOUT")
+                {
+                    CerrarSesion();
+                }
+                else if (Accion.Value == "SAVE_USER")
+                {
+                    GuardarUsuario();
+                }
             }
-        }
-
-        private void InitControls()
-        {
-            ValidarSiInicioSesion();
         }
 
         private void ValidarSiInicioSesion()
         {
-            //if (true)
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "window.location.href = ('VistaPrincipal.aspx');", true);
+            if (Session["Dni"] == null)
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "window.location.href = ('VistaPrincipal.aspx');", true);
         }
 
-        public void ObtenerListadoTuristas()
+        private void ObtenerListadoTuristas()
         {
             try
             {
@@ -64,8 +66,8 @@ namespace AppMarcahuasi.Infraestructura
 
                 List<Turismo> listado = new List<Turismo>();
                 listado = logica.ListarTuristas(fechaInicio, fechaFin, filtroNacionalidad);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "quitarSpinner()", true);
-                ExportarExcel(listado, fechaInicio, fechaFin);
+
+                ExportarExcel(listado, fechaInicio, fechaFin, filtroNacionalidad);
             }
             catch (Exception ex)
             {
@@ -73,11 +75,11 @@ namespace AppMarcahuasi.Infraestructura
             }
         }
 
-        public void ExportarExcel(List<Turismo> lista, DateTime fechaInicio, DateTime fechaFin)
+        private void ExportarExcel(List<Turismo> lista, DateTime fechaInicio, DateTime fechaFin, string nacionalidad)
         {
             string colorCabecera = "#224275";
             string colorLetraCabecera = "#FFFFFF";
-            string titulo = "REGISTRO DE INGRESOS PARA CONTROL (MOSTRANDO TODA LA INFORMACION)";
+            string titulo = "REGISTRO DE INGRESOS PARA CONTROL HISTORICO";
 
             if (fechaInicio.Year != 1900 && fechaFin.Year != 3000)
                 titulo = "REGISTRO DE INGRESOS PARA CONTROL DEL " + fechaInicio.ToShortDateString() + " AL " + fechaFin.ToShortDateString();
@@ -85,6 +87,15 @@ namespace AppMarcahuasi.Infraestructura
                 titulo = "REGISTRO DE INGRESOS PARA CONTROL DEL " + fechaInicio.ToShortDateString() + " AL " + DateTime.Now.ToShortDateString();
             else if (fechaFin.Year != 3000)
                 titulo = "REGISTRO DE INGRESOS PARA CONTROL HASTA LA FECHA " + fechaFin.ToShortDateString();
+
+            if (nacionalidad == "N")
+                titulo += " (NACIONALES)";
+            else if (nacionalidad == "E")
+                titulo += " (EXTRANJEROS)";
+            else if (nacionalidad == "S")
+                titulo += " (ESTUDIANTES)";
+            else
+                titulo += " (TODOS)";
 
 
             using (var workbook = new XLWorkbook())
@@ -96,13 +107,16 @@ namespace AppMarcahuasi.Infraestructura
                 string rango = "";
 
                 #region cabecera
-                prueba.Range("A1:E1").Merge();
-                prueba.Range("A1:E1").Value = titulo;
-                prueba.Range("A1:E1").Style.Font.Bold = true;
-                prueba.Range("A1:E1").Style.Font.FontSize = 15;
+                prueba.Range("A1:F1").Merge();
+                prueba.Range("A1:F1").Value = titulo;
+                prueba.Range("A1:F1").Style.Font.Bold = true;
+                prueba.Range("A1:F1").Style.Font.FontSize = 15;
 
-
-
+                prueba.Range("H1:H1").Merge();
+                prueba.Range("H1:H1").Value = Parametros.NumeroCaja;
+                prueba.Range("H1:H1").Style.Font.Bold = true;
+                prueba.Range("H1:H1").Style.Font.FontSize = 15;
+                
                 nFila = nFila + 2;
                 string[] textosCabecera = new string[] { "Numero", "Nombres", "Apellidos", "Correlativo", "Nacionalidad", "Precio", "Fecha Ingreso", "Usuario Registra" };
 
@@ -127,20 +141,37 @@ namespace AppMarcahuasi.Infraestructura
                 #region tabla
 
                 int xCont = 0;
-                int xMontoAcumulado = 0;
+                int xMontoNacional = 0;
+                int xMontoExtranjero = 0;
+                int xMontoEstudiante = 0;
 
                 foreach (Turismo item in lista)
                 {
                     nFila++;
                     nColumna = 1;
                     xCont++;
-                    xMontoAcumulado += item.PrecioBoleta;
 
                     prueba.Cell(nFila, nColumna++).Value = xCont;
                     prueba.Cell(nFila, nColumna++).Value = item.Nombres;
                     prueba.Cell(nFila, nColumna++).Value = item.Apellidos;
                     prueba.Cell(nFila, nColumna++).Value = item.Correlativo;
-                    prueba.Cell(nFila, nColumna++).Value = (item.Nacionalidad.ToString() == "N" ? "Nacional" : "Extranjero");
+
+                    if (item.Nacionalidad.ToString() == "N")
+                    {
+                        prueba.Cell(nFila, nColumna++).Value = "Nacional";
+                        xMontoNacional += item.PrecioBoleta;
+                    }
+                    else if (item.Nacionalidad.ToString() == "E")
+                    {
+                        prueba.Cell(nFila, nColumna++).Value = "Extranjero";
+                        xMontoExtranjero += item.PrecioBoleta;
+                    }
+                    else
+                    {
+                        prueba.Cell(nFila, nColumna++).Value = "Estudiante";
+                        xMontoEstudiante += item.PrecioBoleta;
+                    }
+
                     prueba.Cell(nFila, nColumna++).Value = item.PrecioBoleta;
                     prueba.Cell(nFila, nColumna - 1).Style.NumberFormat.Format = "0.00";
                     prueba.Cell(nFila, nColumna++).Value = item.Fecha_Registro.ToString("dd-MM-yyyy  hh:mm tt");
@@ -153,21 +184,52 @@ namespace AppMarcahuasi.Infraestructura
                 nColumna = 5;
                 string colorFondoItemInferior = "#92d150";
 
-                prueba.Cell(nFila, nColumna).Value = "Total";
+                prueba.Cell(nFila, nColumna).Value = "Nacional";
                 prueba.Cell(nFila, nColumna).Style.Fill.BackgroundColor = XLColor.FromHtml(colorFondoItemInferior);
+                prueba.Cell(nFila, nColumna).Style.Font.Bold = true;
 
                 nColumna++;
-                prueba.Cell(nFila, nColumna).Value = xMontoAcumulado;
+                prueba.Cell(nFila, nColumna).Value = xMontoNacional;
+                prueba.Cell(nFila, nColumna).Style.NumberFormat.Format = "0.00";
+
+                nFila++;
+                nColumna = 5;
+                prueba.Cell(nFila, nColumna).Value = "Extranjero";
+                prueba.Cell(nFila, nColumna).Style.Fill.BackgroundColor = XLColor.FromHtml(colorFondoItemInferior);
+                prueba.Cell(nFila, nColumna).Style.Font.Bold = true;
+
+                nColumna++;
+                prueba.Cell(nFila, nColumna).Value = xMontoExtranjero;
+                prueba.Cell(nFila, nColumna).Style.NumberFormat.Format = "0.00";
+
+                nFila++;
+                nColumna = 5;
+                prueba.Cell(nFila, nColumna).Value = "Estudiante";
+                prueba.Cell(nFila, nColumna).Style.Fill.BackgroundColor = XLColor.FromHtml(colorFondoItemInferior);
+                prueba.Cell(nFila, nColumna).Style.Font.Bold = true;
+
+                nColumna++;
+                prueba.Cell(nFila, nColumna).Value = xMontoEstudiante;
+                prueba.Cell(nFila, nColumna).Style.NumberFormat.Format = "0.00";
+
+                nFila++;
+                nColumna = 5;
+                prueba.Cell(nFila, nColumna).Value = "Total";
+                prueba.Cell(nFila, nColumna).Style.Fill.BackgroundColor = XLColor.FromHtml(colorFondoItemInferior);
+                prueba.Cell(nFila, nColumna).Style.Font.Bold = true;
+
+                nColumna++;
+                prueba.Cell(nFila, nColumna).Value = xMontoNacional + xMontoExtranjero;
                 prueba.Cell(nFila, nColumna).Style.NumberFormat.Format = "0.00";
 
                 #endregion
 
                 #region estilos
-                rango = "A3:H" + (nFila - 2);
+                rango = "A3:H" + (nFila - 5);
                 prueba.Range(rango).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
                 prueba.Range(rango).Style.Border.InsideBorder = XLBorderStyleValues.Thin;
 
-                rango = "E" + nFila + ":F" + nFila;
+                rango = "E" + (nFila - 3) + ":F" + nFila;
                 prueba.Range(rango).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
                 prueba.Range(rango).Style.Border.InsideBorder = XLBorderStyleValues.Thin;
 
@@ -181,6 +243,7 @@ namespace AppMarcahuasi.Infraestructura
                 prueba.Column("G").Width = 25;
                 prueba.Column("H").Width = 20;
                 prueba.Range("A1:E1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                prueba.Range("H1:H1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
 
                 #endregion
 
@@ -206,6 +269,21 @@ namespace AppMarcahuasi.Infraestructura
                 }
 
             }
+        }
+
+        private void CerrarSesion()
+        {
+            Session["Dni"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "window.location.href = ('VistaPrincipal.aspx');", true);
+        }
+
+        private void GuardarUsuario()
+        {
+            Parametros.UserLogin = txtNombreAdmin.Value;
+            Session["Dni"] = null;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", 
+                "saveUserSucces('Se ha asignado a " + txtNombreAdmin.Value + " a la caja " + Parametros.NumeroCaja + "')", true);
         }
 
     }
