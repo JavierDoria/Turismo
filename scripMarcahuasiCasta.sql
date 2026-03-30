@@ -5,7 +5,7 @@ USE TurismoCasta
 GO
 
 CREATE TABLE [dbo].[Turista](
-	[Id_Turista] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Turista] [int] IDENTITY NOT NULL,
 	[Nombres] [varchar](40) NOT NULL,
 	[Apellidos] [varchar](40) NOT NULL,
 	[Nacionalidad] [char](1) NOT NULL,
@@ -25,10 +25,19 @@ GO
 ALTER TABLE [dbo].[Turista] ADD  CONSTRAINT [DF_Turistas_FechaRegistro]  DEFAULT (getdate()) FOR [Fecha_Registro]
 GO
 
-ALTER TABLE [dbo].[Turista]  WITH CHECK ADD CHECK  (([Nacionalidad]='E' OR [Nacionalidad]='N'))
+ALTER TABLE [dbo].[Turista] ADD CONSTRAINT CK_Turista_Nacionalidad CHECK ([Nacionalidad] IN ('E', 'N', 'S'));
 GO
 
+CREATE TABLE Administrador(
+	Id_Administrador int primary key identity,
+	Dni varchar(8) unique,
+	Password varchar(25)
+)
+go
 
+insert into Administrador(Dni, Password) values
+	(72557870, 'planetas159')
+GO
 
 -- =============================================Registrar
 CREATE PROCEDURE sp_RegistrarTurista 
@@ -96,3 +105,5 @@ BEGIN
 	where cast(Fecha_Registro as date) = cast(getdate() as date) 
 	order by Id_Turista desc
 END
+
+exec sp_ObtenerUltimoRegistro
