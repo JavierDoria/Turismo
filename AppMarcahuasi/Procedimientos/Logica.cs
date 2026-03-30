@@ -1,5 +1,6 @@
 ﻿using AppMarcahuasi.Entities;
 using AppMarcahuasi.Utils;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -63,14 +64,14 @@ namespace AppMarcahuasi.Procedimientos
                 oCm.Parameters.Add("@Apellidos", SqlDbType.VarChar, 40);
                 oCm.Parameters.Add("@Nacionalidad", SqlDbType.Char, 1);
                 oCm.Parameters.Add("@PrecioBoleta", SqlDbType.Int);
-                oCm.Parameters.Add("@Usuario_Modifica", SqlDbType.VarChar, 40);
+                oCm.Parameters.Add("@Usuario_Modificacion", SqlDbType.VarChar, 40);
 
                 oCm.Parameters["@Id_Turista"].Value = turismo.Id_Turista;
                 oCm.Parameters["@Nombres"].Value = turismo.Nombres;
                 oCm.Parameters["@Apellidos"].Value = turismo.Apellidos;
                 oCm.Parameters["@Nacionalidad"].Value = turismo.Nacionalidad;
                 oCm.Parameters["@PrecioBoleta"].Value = turismo.PrecioBoleta;
-                oCm.Parameters["@Usuario_Modificacion"].Value = turismo.Usuario_Modificacion;
+                oCm.Parameters["@Usuario_Modificacion"].Value = Parametros.UserLogin;
 
                 Respuesta = oCm.ExecuteNonQuery() > 0;
             }
@@ -157,6 +158,9 @@ namespace AppMarcahuasi.Procedimientos
                             turista.Apellidos = dr["Apellidos"].ToString();
                             turista.Nacionalidad = dr["Nacionalidad"].ToString().Trim()[0];
                             turista.PrecioBoleta = Convert.ToInt32(dr["PrecioBoleta"]);
+
+                            if(!string.IsNullOrWhiteSpace(dr["Fecha_Modificacion"].ToString()))
+                            turista.Fecha_Modificacion = DateTime.Parse(dr["Fecha_Modificacion"].ToString());
 
                             listado.Add(turista);
                         }
