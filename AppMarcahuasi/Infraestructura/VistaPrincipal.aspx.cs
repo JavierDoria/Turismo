@@ -35,22 +35,20 @@ namespace AppMarcahuasi.Infraestructura
                 if (Accion.Value == "REGISTRAR")
                 {
                     RegistrarTicket();
-                    ObtenerUltimoTurista();
                 }
                 else if (Accion.Value == "ACTUALIZAR")
                 {
                     ActualizarRegistro();
-                    ObtenerUltimoTurista();
                 }
                 limpiarCamposRegistro();
             }
         }
-
         private void limpiarCamposRegistro()
         {
             txtNombre.Text = "";
             txtApellido.Text = "";
             ddlNacionalidad.SelectedIndex = 0;
+            Accion.Value = "";
         }
 
         private void ObtenerUltimoTurista()
@@ -122,7 +120,7 @@ namespace AppMarcahuasi.Infraestructura
                 bool respuesta = logica.RegistrarTurista(turismo);
 
                 if (respuesta)
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ok", "imprimirExito();", true);            
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ok", "imprimirExito();", true);
                 else
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "err", "errorTicket('No se pudo registrar el ingreso, contacte con soporte');", true);
 
@@ -138,24 +136,22 @@ namespace AppMarcahuasi.Infraestructura
         {
             string Dni = txtDni.Text.Trim();
             string Password = txtPassword.Text.Trim();
-            //if (string.IsNullOrEmpty(Dni) || string.IsNullOrEmpty(Password))
-            //{
-            //    MostrarError("Complete todos los campos");
-            //    return;
-            //}
-            //if (!System.Text.RegularExpressions.Regex.IsMatch(Dni, @"^\d{8}$"))
-            //{
-            //    MostrarError("El DNI debe tener 8 dígitos");
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(Dni) || string.IsNullOrEmpty(Password))
+            {
+                MostrarError("Complete todos los campos");
+                return;
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(Dni, @"^\d{8}$"))
+            {
+                MostrarError("El DNI debe tener 8 dígitos");
+                return;
+            }
             try
             {
                 Administrador admin = new Administrador
                 {
-                    //Dni = Dni,
-                    //Password = Password
-                    Dni = "72557870",
-                    Password = "planetas159"
+                    Dni = Dni,
+                    Password = Password
                 };
                 Logica logica = new Logica();
                 bool acceso = logica.VerificarLogin(admin);

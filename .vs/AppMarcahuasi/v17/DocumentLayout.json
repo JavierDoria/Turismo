@@ -1,30 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\",
+  "WorkspaceRootPath": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\USUARIO\\Desktop\\proyecto casta\\appmarcahuasi\\procedimientos\\logica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\procedimientos\\logica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|c:\\users\\jjjja\\desktop\\appmuni\\appmarcahuasi\\appmarcahuasi\\infraestructura\\vistaprincipal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaprincipal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\USUARIO\\Desktop\\proyecto casta\\appmarcahuasi\\utils\\parametros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\utils\\parametros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|c:\\users\\usuario\\desktop\\proyecto casta\\appmarcahuasi\\infraestructura\\vistaprincipal.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\appmarcahuasi\\infraestructura\\vistaprincipal.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaprincipal.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\USUARIO\\Desktop\\proyecto casta\\appmarcahuasi\\infraestructura\\vistaadministrador.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaadministrador.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\appmarcahuasi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\USUARIO\\Desktop\\proyecto casta\\appmarcahuasi\\infraestructura\\vistaadministrador.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\appmarcahuasi\\infraestructura\\vistaadministrador.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaadministrador.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\USUARIO\\Desktop\\proyecto casta\\appmarcahuasi\\infraestructura\\vistaprincipal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaprincipal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\appmarcahuasi\\infraestructura\\vistaadministrador.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{DC2E6676-9879-4A90-8D9C-3F3D36D99D27}|AppMarcahuasi\\AppMarcahuasi.csproj|solutionrelative:appmarcahuasi\\infraestructura\\vistaadministrador.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,81 +33,70 @@
           "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "VistaAdministrador.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
-              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T15:08:10.106Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VistaAdministrador.aspx",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
-              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-03-28T16:04:26.324Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "VistaPrincipal.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
-              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T00:02:45.229Z",
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Web.config",
+              "RelativeDocumentMoniker": "AppMarcahuasi\\Web.config",
+              "ToolTip": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Web.config",
+              "RelativeToolTip": "AppMarcahuasi\\Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-03-31T20:18:47.213Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "VistaPrincipal.aspx",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
-              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
+              "DocumentIndex": 4,
+              "Title": "VistaAdministrador.aspx",
+              "DocumentMoniker": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
+              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
+              "ToolTip": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
+              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-03-24T15:50:14.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-31T04:40:39.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "VistaAdministrador.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
+              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
+              "ToolTip": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
+              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaAdministrador.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-31T04:34:21.124Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Parametros.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Utils\\Parametros.cs",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Utils\\Parametros.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Utils\\Parametros.cs",
-              "RelativeToolTip": "AppMarcahuasi\\Utils\\Parametros.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA3AAAAAAAAAA==",
+              "Title": "VistaPrincipal.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
+              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
+              "ToolTip": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
+              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAIwM4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T04:33:46.963Z",
+              "WhenOpened": "2026-03-30T22:32:15.937Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Logica.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Procedimientos\\Logica.cs",
-              "RelativeDocumentMoniker": "AppMarcahuasi\\Procedimientos\\Logica.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Desktop\\proyecto casta\\AppMarcahuasi\\Procedimientos\\Logica.cs",
-              "RelativeToolTip": "AppMarcahuasi\\Procedimientos\\Logica.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T23:56:13.685Z",
+              "Title": "VistaPrincipal.aspx",
+              "DocumentMoniker": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
+              "RelativeDocumentMoniker": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
+              "ToolTip": "C:\\Users\\jjjja\\Desktop\\appMuni\\AppMarcahuasi\\AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
+              "RelativeToolTip": "AppMarcahuasi\\Infraestructura\\VistaPrincipal.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-30T16:38:54.689Z",
               "EditorCaption": ""
             }
           ]

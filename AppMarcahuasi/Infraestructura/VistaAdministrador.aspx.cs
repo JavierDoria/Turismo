@@ -21,6 +21,7 @@ namespace AppMarcahuasi.Infraestructura
         {
             if (!IsPostBack)
             {
+                ValidarSiInicioSesion();
             }
             else
             {
